@@ -7,13 +7,14 @@ import {
   Post,
   UseGuards,
 } from '@nestjs/common';
-import { ApiOperation } from '@nestjs/swagger';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/jwt/jwt.guard';
 import { CurrentUser } from 'src/common/decorators/user.decorator';
 import { User } from 'src/user/user.schema';
 import { CommentService } from './comment.service';
 import { CreateCommentDto } from './dto/create-comment.dto';
 
+@ApiTags('COMMENT')
 @UseGuards(JwtAuthGuard)
 @Controller('comment')
 export class CommentController {

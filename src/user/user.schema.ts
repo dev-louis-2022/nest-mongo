@@ -47,6 +47,7 @@ export class User extends Document {
     email: string;
     name: string;
     imgUrl: string;
+    comments: Comment[];
   };
 
   readonly comments: Comment[];
@@ -60,11 +61,12 @@ _UserSchema.virtual('readOnlyData').get(function (this: User) {
     email: this.email,
     name: this.name,
     imgUrl: this.imgUrl,
+    comments: this.comments,
   };
 });
 
 _UserSchema.virtual('comments', {
-  ref: 'comment',
+  ref: 'Comment',
   localField: '_id',
   foreignField: 'info',
 });

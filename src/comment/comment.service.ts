@@ -1,6 +1,6 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Types, Model } from 'mongoose';
 import { User } from 'src/user/user.schema';
 import { Comment } from './comment.schema';
 import { CreateCommentDto } from './dto/create-comment.dto';
@@ -20,9 +20,9 @@ export class CommentService {
         throw new BadRequestException('해당 유저가 존재하지 않습니다.');
       }
       return await this.commentModel.create({
-        author: id,
+        author: new Types.ObjectId(id),
         content,
-        info,
+        info: targetUser._id,
       });
     } catch (error) {
       throw new BadRequestException(error.message);
@@ -31,7 +31,7 @@ export class CommentService {
 
   async getAll(id: string) {
     try {
-      return await this.commentModel.find();
+      return await this.commentModel.findById(id);
     } catch (error) {
       throw new BadRequestException(error.message);
     }

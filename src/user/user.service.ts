@@ -45,8 +45,8 @@ export class UserService {
   }
 
   async getAll() {
-    // const CommentModel = mongoose.model(Comment.name, CommentSchema);
-    // return this.userModel.find().populate('comments', CommentModel);
-    return (await this.userModel.find()).map((user) => user.readOnlyData);
+    return (
+      await this.userModel.find().populate('comments', 'content likeCount')
+    ).map((user) => user.readOnlyData);
   }
 }

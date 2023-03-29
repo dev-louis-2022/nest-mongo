@@ -2,8 +2,6 @@ import {
   Body,
   Controller,
   Get,
-  HttpStatus,
-  ParseFilePipeBuilder,
   Post,
   UploadedFiles,
   UseGuards,
@@ -22,7 +20,7 @@ import { ReadUserDto } from './dto/read-user.dto';
 import { User } from './user.schema';
 import { UserService } from './user.service';
 
-@ApiTags('user')
+@ApiTags('USER')
 @Controller('user')
 export class UserController {
   constructor(
